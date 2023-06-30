@@ -1,0 +1,11 @@
+package com.restaurante.cardapio.repository;
+
+import com.restaurante.cardapio.domain.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+public interface ProductRepository extends JpaRepository<Product, Long> {
+      Page<Product> findAllByActive(boolean active, Pageable pageable);
+}
