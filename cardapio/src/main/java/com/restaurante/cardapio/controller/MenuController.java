@@ -2,7 +2,7 @@ package com.restaurante.cardapio.controller;
 
 import com.restaurante.cardapio.controller.request.ProductRequest;
 import com.restaurante.cardapio.controller.response.IdResponse;
-import com.restaurante.cardapio.controller.response.ProductsResponse;
+import com.restaurante.cardapio.controller.response.ProductResponse;
 import com.restaurante.cardapio.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -49,19 +49,19 @@ public class MenuController {
 
     @GetMapping
     @ResponseStatus(OK)
-    public Page<ProductsResponse> listProducts(Pageable pageable){
+    public Page<ProductResponse> listProducts(Pageable pageable){
         return listProductsService.list(pageable);
     }
 
     @GetMapping("/products-inactives")
     @ResponseStatus(OK)
-    public Page<ProductsResponse> listProductsInactive(Pageable pageable){
+    public Page<ProductResponse> listProductsInactive(Pageable pageable){
         return listProductsInactiveService.list(pageable);
     }
 
     @GetMapping("/product/{id}")
     @ResponseStatus(OK)
-    public ProductsResponse detailProduct(@PathVariable Long id){
+    public ProductResponse detailProduct(@PathVariable Long id){
         return detailProductService.detail(id);
     }
 

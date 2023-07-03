@@ -23,6 +23,8 @@ public class Product {
 
     private String productName;
 
+    private String description;
+
     private LocalDateTime createdOn;
 
     private LocalDateTime updatedOn;

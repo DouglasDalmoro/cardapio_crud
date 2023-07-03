@@ -9,16 +9,13 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 @Setter
-public class ProductsResponse {
+public class ProductResponse {
 
     private Long id;
     private String productName;
-
+    private String description;
     private LocalDateTime createdOn;
-
     private LocalDateTime updatedOn;
-
     private String image;
-
     private boolean active;
 }

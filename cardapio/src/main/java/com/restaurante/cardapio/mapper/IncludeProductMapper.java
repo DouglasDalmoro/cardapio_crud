@@ -8,6 +8,7 @@ public class IncludeProductMapper {
         return Product.builder()
                 .productName(request.getProductName())
                 .image(request.getImage())
+                .description(request.getDescription())
                 .build();
     }
 }
