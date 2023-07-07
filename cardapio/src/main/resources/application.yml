@@ -6,6 +6,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 server:
   error:

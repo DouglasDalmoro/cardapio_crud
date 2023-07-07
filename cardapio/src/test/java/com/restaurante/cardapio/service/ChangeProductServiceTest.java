@@ -3,6 +3,7 @@ package com.restaurante.cardapio.service;
 import com.restaurante.cardapio.controller.request.ProductRequest;
 import com.restaurante.cardapio.domain.Product;
 import com.restaurante.cardapio.repository.ProductRepository;
+import com.restaurante.cardapio.validator.ProductAtivoValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,6 +30,9 @@ public class ChangeProductServiceTest {
     @Mock
     private ProductRepository productRepository;
 
+    @Mock
+    private ProductAtivoValidator productAtivoValidator;
+
     @Captor
     private ArgumentCaptor<Product> productCaptor;
 
@@ -44,6 +48,7 @@ public class ChangeProductServiceTest {
         test.change(product.getId(), request);
 
         verify(findProductService).findById(product.getId());
+        verify(productAtivoValidator).validateProduct(product);
         verify(productRepository).save(productCaptor.capture());
     }
 }

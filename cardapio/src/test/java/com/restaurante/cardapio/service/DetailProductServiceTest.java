@@ -2,6 +2,7 @@ package com.restaurante.cardapio.service;
 
 import com.restaurante.cardapio.controller.response.ProductResponse;
 import com.restaurante.cardapio.domain.Product;
+import com.restaurante.cardapio.validator.ProductAtivoValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,6 +24,9 @@ public class DetailProductServiceTest {
     @Mock
     private FindProductService findProductService;
 
+    @Mock
+    private ProductAtivoValidator productAtivoValidator;
+
     @Test
     @DisplayName("Should return product response when product is successfully found")
     void shouldReturnProductResponse(){
@@ -35,6 +39,7 @@ public class DetailProductServiceTest {
         ProductResponse response = test.detail(id);
 
         verify(findProductService).findById(id);
+        verify(productAtivoValidator).validateProduct(product);
         assertEquals(product.getId(), response.getId());
         assertEquals(product.getProductName(), response.getProductName());
         assertEquals(product.getDescription(), response.getDescription());

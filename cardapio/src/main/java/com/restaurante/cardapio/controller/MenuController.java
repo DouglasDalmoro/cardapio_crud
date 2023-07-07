@@ -4,15 +4,18 @@ import com.restaurante.cardapio.controller.request.ProductRequest;
 import com.restaurante.cardapio.controller.response.IdResponse;
 import com.restaurante.cardapio.controller.response.ProductResponse;
 import com.restaurante.cardapio.service.*;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping("v1/menu")
@@ -59,13 +62,22 @@ public class MenuController {
         return listProductsInactiveService.list(pageable);
     }
 
-    @GetMapping("/product/{id}")
+    @GetMapping(value = "/product/{id}",  produces="application/json")
     @ResponseStatus(OK)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna o produto detalhado"),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)
+    })
     public ProductResponse detailProduct(@PathVariable Long id){
         return detailProductService.detail(id);
     }
 
     @DeleteMapping("/product/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Produto removido"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)
+    })
     public void deleteProduct(@PathVariable Long id){
         deleteProductService.delete(id);
     }
